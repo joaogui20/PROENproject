@@ -63,5 +63,16 @@ def deleteProcess(request, id):
     messages.info(request, 'Processo deletado com sucesso!')
     return redirect('/')
 
+@login_required
+def changeStatus(request, id):
+    process = get_object_or_404(Process, pk=id)
+
+    if(process.done == 'Realizando'):
+        process.done = 'Realizado'
+    else:
+        process.done = 'Realizando'
+    process.save()
+    return redirect('\')
+
 def yourName(request, name):
     return render(request, 'processos/yourname.html', {'name': name})

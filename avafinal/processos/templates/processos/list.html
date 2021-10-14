@@ -26,10 +26,15 @@
     <div>
         <ul class="processos-list">
             {% for process in process %}
-            <li class="processos-item">
+            {% if process.done == 'Realizado' %}
+                <li class="processos-item">
+            {% else %}
+                <li class="processos-item done">
+            {% endif %}
                 <span><a href="/process/{{process.id}}">{{process.title}}</a></span>
                 <a href="delete/{{process.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
                 <a href="edit/{{process.id}}"><span><i class="fas fa-edit"></i></span></a>
+                <a href="changestatus/{{process.id}}"><span><i class="fas fa-check"></i></span></a>
             </li>
             {% endfor %}
         </ul>

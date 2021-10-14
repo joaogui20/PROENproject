@@ -23,6 +23,7 @@ urlpatterns = [
     path('newprocess/', views.newProcess, name='new-process'),
     path('', views.processList, name='process-list'),
     path('edit/<int:id>', views.editProcess, name='edit-process'),
+    path('changestatus/<int:id>', views.changeStatus, name='change-status'),
     path('delete/<int:id>', views.deleteProcess, name='delete-process'),
     path('yourname/<str:name>', views.yourName, name='your-name'),
 ]
