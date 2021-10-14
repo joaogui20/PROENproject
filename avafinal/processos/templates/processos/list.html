@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de processos{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>Lista de processos</h1>
+    <a id="add-link" href="newprocess/">
+        <div class="col-2 add-div">
+            <i class="fas fa-plus"></i> Adicionar processos
+        </div>
+    </a>
+    <div class="col-9 search-div">
+        <form method="GET" id="search-form">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome do processo" value="{{ request.GET.search }}">
+            <i class="fas fa-search" id="search-btn"></i>
+        </form>
+    </div>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %}class= "alert alert-{{message.tags}}"{% endif %}></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div>
+        <ul class="processos-list">
+            {% for process in process %}
+            <li class="processos-item">
+                <span><a href="/process/{{process.id}}">{{process.title}}</a></span>
+                <a href="delete/{{process.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+                <a href="edit/{{process.id}}"><span><i class="fas fa-edit"></i></span></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if process.has_previous %}
+                <a href="?page={{ process.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+
+            {% if process.paginator.num_pages %}
+            <span class="current">
+                {{ process.number }} de {{ process.paginator.num_pages }}
+            </span>
+            {% endif %}
+
+            {% if process.has_next %}
+                <a href="?page={{ process.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{%  endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de processos{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>{{process.title}}</h1>
+    <p>{{process.description}}</p>
+</div>
+{%  endblock %}
